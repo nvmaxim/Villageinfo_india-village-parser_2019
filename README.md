@@ -1,6 +1,6 @@
 # Villageinfo India Village Parser 2019
 
-Проект предназначен для автоматизированного парсинга данных о деревнях Индии с портала [Mission Antyodaya](https://missionantyodaya.nic.in).
+Проект предназначен для автоматизированного парсинга данных о деревнях Индии с портала [VillageInfo](https://villageinfo.in).
 
 ## Оглавление
 - [Описание](#описание)
