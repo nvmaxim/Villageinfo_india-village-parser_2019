@@ -1,0 +1,67 @@
+function cycleLoop() {
+  var ss = SpreadsheetApp.getActive()
+  var sheet =ss.getSheetByName("ImportSheet")
+
+  if (sheet == null)
+  {  
+    sheet = ss.insertSheet("ImportSheet")    
+  }
+  sheet.getRange(1,1).setValue( "=IMPORTXML(\"https://villageinfo.in/haryana.html\";\"//a[starts-with(@href, 'haryana')]/@href\")");
+  var a=sheet.getRange(1,1).getValue();
+  var i=2;
+  var strokeNum=1;
+  while(a){
+    sheet.getRange(1,4).setValue("=IMPORTXML(\"https://villageinfo.in/"+a+"\";\"//a[starts-with(@href, '/haryana')]/@href\")");
+    var aa=sheet.getRange(1,4).getValue();
+    var ii=2;
+    while(aa)
+    {
+      sheet.getRange(1,8).setValue("=IMPORTXML(\"https://villageinfo.in"+aa+"\";\"//a[starts-with(@href, '/haryana')]/@href\")");
+      var aaa=sheet.getRange(1,8).getValue();
+      var iii=2;      
+      while(aaa)
+      {
+        sheet.getRange(strokeNum,12).setValue("=ImportHtml(\"https://villageinfo.in"+aaa+"\";\"table\";0)");
+        var aaaa=sheet.getRange(strokeNum,8).getValue();
+        while(aaaa){
+          strokeNum++;
+          aaaa=sheet.getRange(strokeNum,12).getValue();
+        }
+        aaa=sheet.getRange(iii,8).getValue();
+        iii++;
+      }
+      aa=sheet.getRange(i,4).getValue();
+      ii++;
+    }
+    a=sheet.getRange(i,1).getValue();
+    i++;
+  }
+}
+  function constantCycleLoop() {
+    var ss = SpreadsheetApp.getActive()
+    var sheet =ss.getSheetByName("ImportSheet")
+
+    if (sheet == null)
+    {  
+      sheet = ss.insertSheet("ImportSheet")    
+    }
+    var strokeNum=1;
+    sheet.getRange(1,1).setValue( "=IMPORTXML(\"https://villageinfo.in/haryana.html\";\"//a[starts-with(@href, 'haryana')]/@href\")");
+    var a=sheet.getRange(3,1).getValue();
+    sheet.getRange(1,4).setValue("=IMPORTXML(\"https://villageinfo.in/"+a+"\";\"//a[starts-with(@href, '/haryana')]/@href\")");
+    var aa=sheet.getRange(1,4).getValue();
+    sheet.getRange(1,8).setValue("=IMPORTXML(\"https://villageinfo.in"+aa+"\";\"//a[starts-with(@href, '/haryana')]/@href\")");
+    var aaa=sheet.getRange(1,8).getValue();
+      var iii=2;      
+      while(aaa)
+      {
+        sheet.getRange(strokeNum,12).setValue("=ImportHtml(\"https://villageinfo.in"+aaa+"\";\"table\";0)");
+        var aaaa=sheet.getRange(strokeNum,12).getValue();
+        while(aaaa){
+          strokeNum++;
+          aaaa=sheet.getRange(strokeNum,12).getValue();
+        }
+        aaa=sheet.getRange(iii,8).getValue();
+        iii++;
+      }
+}
